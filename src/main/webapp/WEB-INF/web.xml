@@ -21,7 +21,6 @@
     </welcome-file-list>
 
     <!-- Context parameter ( 전역 파라미터 ) -->
-
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>/WEB-INF/spring/application-context.xml</param-value>

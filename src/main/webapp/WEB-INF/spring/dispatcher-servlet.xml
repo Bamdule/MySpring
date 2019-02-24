@@ -12,8 +12,25 @@
     http://www.springframework.org/schema/beans/spring-beans.xsd    http://www.springframework.org/schema/context
     http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <context:annotation-config />
+    
     <context:component-scan base-package="com.bamdule.controller"/>
+    <mvc:annotation-driven />
+ 
+    <bean id="multipartResolver" class="org.springframework.web.multipart.support.StandardServletMultipartResolver"/>
+    <!--<mvc:resources mapping="/WEB-INF/resources/js/**" location="/js/" />-->
+    <mvc:default-servlet-handler />
+ 
+    <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+        <property name="basename">
+            <value>messages</value>
+        </property>
+    </bean>
+ 
+    <bean id='viewResolver' class='org.springframework.web.servlet.view.InternalResourceViewResolver'>
+        <property name='viewClass' value='org.springframework.web.servlet.view.JstlView' />
+        <property name='prefix' value='/WEB-INF/views/' />
+        <property name='suffix' value='.jsp' />
+    </bean>
 
 </beans>
 

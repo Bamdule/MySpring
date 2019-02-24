@@ -1,0 +1,3 @@
+
+
+alert('common.js');

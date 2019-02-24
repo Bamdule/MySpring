@@ -20,7 +20,7 @@ public class TestController {
     public String test() {
 
         System.out.println(guestBookDao);
-        return "/WEB-INF/views/hello.jsp";
+        return "hello";
     }
 
 }
