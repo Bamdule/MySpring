@@ -7,9 +7,8 @@ package com.bamdule.dao.impl;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.sql.DataSource;
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -21,6 +20,9 @@ public class BaseDao {
     @Autowired
     private DataSource dataSource;
 
+    @Autowired
+    private SqlSession sqlSession;
+
     protected Connection getConnection() {
         try {
             return dataSource.getConnection();
@@ -30,4 +32,9 @@ public class BaseDao {
 
         return null;
     }
+
+    protected SqlSession getSqlSession() {
+        return sqlSession;
+    }
+
 }

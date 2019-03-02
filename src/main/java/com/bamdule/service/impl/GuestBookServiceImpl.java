@@ -5,6 +5,7 @@ import com.bamdule.model.vo.GuestBookVO;
 import com.bamdule.service.GuestBookService;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,13 +20,8 @@ public class GuestBookServiceImpl implements GuestBookService {
     private GuestBookDao guestBookDao;
 
     @Override
-    public void insert(GuestBookVO vo) {
-        guestBookDao.insert(vo);
-    }
-
-    @Override
-    public List<GuestBookVO> list() {
-        return guestBookDao.getList();
+    public List<Map<String, Object>> list() {
+        return guestBookDao.list();
     }
 
 }

@@ -1,7 +1,7 @@
 package com.bamdule.service;
 
-import com.bamdule.model.vo.GuestBookVO;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -9,8 +9,5 @@ import java.util.List;
  */
 public interface GuestBookService {
 
-    void insert(GuestBookVO vo);
-    
-    List<GuestBookVO> list();
-
+    List<Map<String, Object>> list();
 }

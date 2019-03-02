@@ -2,6 +2,7 @@ package com.bamdule.dao;
 
 import com.bamdule.model.vo.GuestBookVO;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -9,13 +10,5 @@ import java.util.List;
  */
 public interface GuestBookDao {
 
-    List<GuestBookVO> getList();
-
-    public boolean insert(GuestBookVO vo);
-
-    public String getPwd(int no);
-
-    public String getInputPwd(String pwd);
-
-    public boolean delete(int no);
+    List<Map<String,Object>> list();
 }
