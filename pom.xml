@@ -28,6 +28,14 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
             <version>${org.springframework-version}</version>
+            <!-- JCL 제외 -->
+
+            <exclusions>
+                <exclusion>
+                    <groupId>commons-logging</groupId>
+                    <artifactId>commons-logging</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
 
@@ -106,6 +114,35 @@
             <artifactId>poi-ooxml</artifactId>
             <version>3.9</version>
         </dependency>
+        
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.2.3</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/commons-logging/commons-logging -->
+        <dependency>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging</artifactId>
+            <version>1.2</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+            <version>2.0.1.Final</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.el</groupId>
+            <artifactId>javax.el-api</artifactId>
+            <version>2.2.4</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>5.2.1.Final</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -157,5 +194,44 @@
             </plugin>
         </plugins>
     </build>
+
+    <profiles>
+        <profile>
+            <id>local</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <jdbc.driver>org.mariadb.jdbc.Driver</jdbc.driver>
+                <jdbc.url>jdbc:mariadb://dev-db2.cghv74wbbrwx.ap-northeast-1.rds.amazonaws.com:3306/tptv?autoReconnect=true</jdbc.url>
+                <jdbc.username>c_user</jdbc.username>
+                <jdbc.password>user0123</jdbc.password>
+                <jdbc.initSize>2</jdbc.initSize>
+                <jdbc.maxActive>10</jdbc.maxActive>
+                <jdbc.maxIdle>5</jdbc.maxIdle>
+                <jdbc.minIdle>2</jdbc.minIdle>
+
+                <log.defaultFilePath>D:/apache/apache-tomcat-8.5.23/logs/tptv/tptv-bo.log</log.defaultFilePath>
+                <log.dailyFilePath>D:/apache/apache-tomcat-8.5.23/logs/tptv/tptv-bo.%d{yyyy-MM-dd}.log</log.dailyFilePath>
+                <config.serverType>LOCAL</config.serverType>
+            </properties>
+        </profile>
+        <profile>
+            <id>dev</id>
+            <properties>
+                <jdbc.driver>org.mariadb.jdbc.Driver</jdbc.driver>
+                <jdbc.url>jdbc:mariadb://dev-db2.cghv74wbbrwx.ap-northeast-1.rds.amazonaws.com:3306/tptv?autoReconnect=true</jdbc.url>
+                <jdbc.username>c_user</jdbc.username>
+                <jdbc.password>user0123</jdbc.password>
+                <jdbc.initSize>2</jdbc.initSize>
+                <jdbc.maxActive>10</jdbc.maxActive>
+                <jdbc.maxIdle>5</jdbc.maxIdle>
+                <jdbc.minIdle>2</jdbc.minIdle>
+
+                <log.defaultFilePath>/var/lib/tomcat8/webapps/logs/tomcat.log</log.defaultFilePath>
+                <log.dailyFilePath>/var/lib/tomcat8/webapps/logs/tptv-bo.%d{yyyy-MM-dd}.log</log.dailyFilePath>
+            </properties>
+        </profile>
+    </profiles>
 
 </project>

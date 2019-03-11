@@ -6,19 +6,38 @@
     xmlns:p="http://www.springframework.org/schema/p"
     xmlns:context="http://www.springframework.org/schema/context"
     xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xmlns:util="http://www.springframework.org/schema/util"
     xsi:schemaLocation="http://www.springframework.org/schema/mvc
-    http://www.springframework.org/schema/mvc/spring-mvc.xsd     http://www.springframework.org/schema/aop
-    http://www.springframework.org/schema/aop/spring-aop.xsd    http://www.springframework.org/schema/beans
-    http://www.springframework.org/schema/beans/spring-beans.xsd    http://www.springframework.org/schema/context
-    http://www.springframework.org/schema/context/spring-context.xsd">
-
+    http://www.springframework.org/schema/mvc/spring-mvc.xsd     
+    http://www.springframework.org/schema/aop
+    http://www.springframework.org/schema/aop/spring-aop.xsd    
+    http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd    
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd    
+    http://www.springframework.org/schema/util
+    http://www.springframework.org/schema/util/spring-util.xsd">
     
+    
+    <util:properties id="config" location="classpath:/config.properties"/>
+
+    <mvc:annotation-driven/>
     <context:component-scan base-package="com.bamdule.controller"/>
-    <!--<mvc:annotation-driven />-->
  
     <bean id="multipartResolver" class="org.springframework.web.multipart.support.StandardServletMultipartResolver"/>
-    <!--<mvc:resources mapping="/WEB-INF/resources/js/**" location="/js/" />-->
+ 
+    <!--    <mvc:cors>
+        <mvc:mapping 
+            path="/resources/**" 
+            allowed-origins="*"
+            allowed-methods="GET, POST" 
+            allowed-headers="x-requested-with"
+            max-age="360" />
+    </mvc:cors>-->
+    
     <mvc:default-servlet-handler />
+    
+    <mvc:resources mapping="/resources/**" location="/resources/"/>
  
     <bean id='viewResolver' class='org.springframework.web.servlet.view.InternalResourceViewResolver'>
         <property name='viewClass' value='org.springframework.web.servlet.view.JstlView' />
@@ -36,14 +55,13 @@
                     </list>
                 </property>
             </bean>
-
-<!--            <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+            <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
                 <property name="supportedMediaTypes">
                     <list>
                         <value>application/json; charset=UTF-8</value>
                     </list>
                 </property>
-            </bean>-->
+            </bean>
         </mvc:message-converters>
     </mvc:annotation-driven>
 
