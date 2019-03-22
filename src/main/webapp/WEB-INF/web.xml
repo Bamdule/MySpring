@@ -6,12 +6,12 @@
          version="3.1">
     <session-config>
         <session-timeout>
-            30
+            1
         </session-timeout>
     </session-config>
     <display-name>MySpring</display-name>
 
-<!--    <welcome-file-list>
+    <!--    <welcome-file-list>
         <welcome-file>index.html</welcome-file>
         <welcome-file>index.htm</welcome-file>
         <welcome-file>index.jsp</welcome-file>
@@ -19,11 +19,14 @@
         <welcome-file>default.htm</welcome-file>
         <welcome-file>default.jsp</welcome-file>
     </welcome-file-list>-->
-
+    
     <!-- Context parameter ( 전역 파라미터 ) -->
     <context-param>
         <param-name>contextConfigLocation</param-name>
-        <param-value>/WEB-INF/spring/application-context.xml</param-value>
+        <param-value>
+            /WEB-INF/spring/application-context.xml
+            /WEB-INF/spring/security-context.xml
+        </param-value>
     </context-param>
 
     <!-- Context Loader Listner -->
@@ -45,6 +48,17 @@
         <servlet-name>dispatcher</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
+ 
+    <!-- Security Filter -->
+    <filter>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    
     
     <!-- Encoding Filter -->
     <filter>
@@ -66,6 +80,5 @@
         <filter-name>encodingFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
-
-
+    
 </web-app>

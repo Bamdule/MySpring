@@ -34,6 +34,12 @@
         </style>
     </head>
     <body>
+        <c:if test="${pageContext.request.userPrincipal.name != null}">
+            <form action="${pageContext.request.contextPath}/logout" method="post">
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                <button type="submit" class="btn btn-primary btn-sm">Logout</button>
+            </form>
+        </c:if>
         <div id="top_layout">
         </div>
         <div id="mid_layout">

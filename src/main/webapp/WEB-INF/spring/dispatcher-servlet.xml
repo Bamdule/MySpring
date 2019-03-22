@@ -7,6 +7,8 @@
     xmlns:context="http://www.springframework.org/schema/context"
     xmlns:mvc="http://www.springframework.org/schema/mvc"
     xmlns:util="http://www.springframework.org/schema/util"
+    xmlns:security="http://www.springframework.org/schema/security"
+    xmlns:task="http://www.springframework.org/schema/task"
     xsi:schemaLocation="http://www.springframework.org/schema/mvc
     http://www.springframework.org/schema/mvc/spring-mvc.xsd     
     http://www.springframework.org/schema/aop
@@ -14,33 +16,46 @@
     http://www.springframework.org/schema/beans
     http://www.springframework.org/schema/beans/spring-beans.xsd    
     http://www.springframework.org/schema/context
-    http://www.springframework.org/schema/context/spring-context.xsd">
+    http://www.springframework.org/schema/context/spring-context.xsd
+	http://www.springframework.org/schema/security  
+	http://www.springframework.org/schema/security/spring-security.xsd
+    http://www.springframework.org/schema/task
+    http://www.springframework.org/schema/task/spring-task-3.0.xsd">
     
     
+    <security:global-method-security secured-annotations="enabled" proxy-target-class="true" pre-post-annotations="enabled" />
 
+    <task:annotation-driven/>
     <mvc:annotation-driven/>
+    <!--<context:annotation-config/>-->
     <context:component-scan base-package="com.bamdule.controller"/>
+    <context:component-scan base-package="com.bamdule.schedule"/>
  
     <bean id="multipartResolver" class="org.springframework.web.multipart.support.StandardServletMultipartResolver"/>
  
-    <!--    <mvc:cors>
-        <mvc:mapping 
-            path="/resources/**" 
-            allowed-origins="*"
-            allowed-methods="GET, POST" 
-            allowed-headers="x-requested-with"
-            max-age="360" />
-    </mvc:cors>-->
-    
     <mvc:default-servlet-handler />
     
-    <mvc:resources mapping="/resources/**" location="/resources/"/>
+    <!--<mvc:resources mapping="/resources/**" location="/resources/"/>-->
+    
+    <mvc:view-controller path="/login" view-name="login" />
+    <mvc:view-controller path="/notAllow" view-name="notAllow" />
+    
  
     <bean id='viewResolver' class='org.springframework.web.servlet.view.InternalResourceViewResolver'>
         <property name='viewClass' value='org.springframework.web.servlet.view.JstlView' />
         <property name='prefix' value='/WEB-INF/views/' />
         <property name='suffix' value='.jsp' />
+        <property name="order" value="2" />
     </bean>
+    
+    <bean class="org.springframework.web.servlet.view.UrlBasedViewResolver"
+          p:viewClass="org.springframework.web.servlet.view.tiles3.TilesView"
+          p:order="1" />
+    
+    <bean id="tilesConfigurer"
+              class="org.springframework.web.servlet.view.tiles3.TilesConfigurer" 
+              p:definitions="classpath:tiles.xml" 
+              p:checkRefresh="true" />
     
     <!--    messageConvertert -->
     <mvc:annotation-driven>
